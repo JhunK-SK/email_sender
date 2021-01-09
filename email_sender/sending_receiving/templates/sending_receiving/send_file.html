@@ -1,0 +1,38 @@
+{% extends 'sending_receiving/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Sending an Email to one person{% endblock %}
+
+{% block content %}
+<div class="container h-75">
+    <div class="d-flex justify-content-md-center h-100">
+        <div class="sending-email">
+            <div class="card-heading d-flex justify-content-md-center h-100">
+                <h3>Sending an email with an attachment</h3>
+            </div>
+            <div class="email-form container">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="emailto">@</span>
+                        {% render_field form.email class="form-control" placeholder="Recepient" aria-describedby="emailto"%}
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="subject">Subject</span>
+                        <input type="text" class="form-control" placeholder="Subject" name="subject" aria-describedby="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="8" name="message" placeholder="Enter a mesage.."></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="file"><i class="far fa-file-alt"></i></span>
+                        <input type="file" class="form-control" placeholder="attach your file" name="file" aria-describedby="file">
+                    </div>
+                    <input type="submit" name="submit" class="btn btn-primary mb-2 float-end" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

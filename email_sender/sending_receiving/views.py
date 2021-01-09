@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import EmailForm
 from email_sender.settings import EMAIL_HOST_USER
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMessage
 
 
 def index(request):
@@ -55,3 +55,35 @@ def receiving(request):
             
     context = {'form': form}
     return render(request, 'sending_receiving/receiving.html', context)
+
+
+def send_file(request):
+    form = EmailForm()
+    
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            recepient = form.cleaned_data.get('email')
+            subject = request.POST.get('subject')
+            message = request.POST.get('message')
+            email = EmailMessage(
+                subject,
+                message,
+                EMAIL_HOST_USER,
+                [recepient],
+                headers={
+                    'Message-ID': 'TEST',
+                }
+            )
+            email.content_subtype = 'html'
+            
+            file = request.FILES['file']
+            email.attach(file.name, file.read(), file.content_type)
+            
+            email.send()
+            
+            context = {'recepient': recepient}
+            return render(request, 'sending_receiving/success.html', context)
+    
+    context = {'form': form}
+    return render(request, 'sending_receiving/send_file.html', context)
