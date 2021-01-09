@@ -10,4 +10,7 @@ urlpatterns = [
     
     # Receiving message from users.
     path('receiving/', views.receiving, name='receiving'),
+    
+    # Sending a message with a uploaded file.
+    path('send_file/', views.send_file, name='send_file'),
 ]

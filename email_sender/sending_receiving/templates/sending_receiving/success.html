@@ -8,7 +8,10 @@
         <div class="d-flex justify-content-md-center h-100">
             <div class="sending-email">
                 <div class="card-heading d-flex justify-content-md-center h-100">
-                    <p>Email has sent to {{ recepient }}</p>
+                    {% if recepient %}
+                    <p>Email has been sent to {{ recepient }}</p>
+                    {% endif %}
+                    <p>Your feedback has been sent to us. We will catch you as soon as possible.</p>
                 </div>
             </div>
         </div>
