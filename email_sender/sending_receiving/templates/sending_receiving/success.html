@@ -1,0 +1,16 @@
+{% extends 'sending_receiving/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Email Sent{% endblock %}
+
+{% block content %}
+    <div class="container h-75">
+        <div class="d-flex justify-content-md-center h-100">
+            <div class="sending-email">
+                <div class="card-heading d-flex justify-content-md-center h-100">
+                    <p>Email has sent to {{ recepient }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
